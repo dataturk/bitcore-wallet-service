@@ -1,19 +1,15 @@
 
 # ravencore-wallet-service
 
-[![NPM Package](https://img.shields.io/npm/v/ravencore-wallet-service.svg?style=flat-square)](https://www.npmjs.org/package/ravencore-wallet-service)
-[![Build Status](https://img.shields.io/travis/dataturk/ravencore-wallet-service.svg?branch=master&style=flat-square)](https://travis-ci.org/dataturk/ravencore-wallet-service)
-[![Coverage Status](https://coveralls.io/repos/dataturk/ravencore-wallet-service/badge.svg?branch=master)](https://coveralls.io/r/dataturk/ravencore-wallet-service?branch=master)
-
-A Multisig HD ravencore Wallet Service.
+A Multisig HD Ravencore Wallet Service.
 
 # Description
 
-ravencore Wallet Service facilitates multisig HD wallets creation and operation through a (hopefully) simple and intuitive REST API.
+Ravencore Wallet Service facilitates multisig HD wallets creation and operation through a (hopefully) simple and intuitive REST API.
 
-BWS can usually be installed within minutes and accommodates all the needed infrastructure for peers in a multisig wallet to communicate and operate – with minimum server trust.
+RWS can usually be installed within minutes and accommodates all the needed infrastructure for peers in a multisig wallet to communicate and operate – with minimum server trust.
   
-See [ravencore-wallet-client](https://github.com/dataturk/ravencore-wallet-client) for the *official* client library that communicates to BWS and verifies its response. Also check [ravencore-wallet](https://github.com/dataturk/ravencore-wallet) for a simple CLI wallet implementation that relies on BWS.
+See [ravencore-wallet-client](https://github.com/dataturk/ravencore-wallet-client) for the *official* client library that communicates to RWS and verifies its response. Also check [ravencore-wallet](https://github.com/dataturk/ravencore-wallet) for a simple CLI wallet implementation that relies on RWS.
 
 # Getting Started
 ```
@@ -24,30 +20,22 @@ See [ravencore-wallet-client](https://github.com/dataturk/ravencore-wallet-clien
 ```
 
 
-This will launch the BWS service (with default settings) at `http://localhost:3232/bws/api`.
+This will launch the RWS service (with default settings) at `http://localhost:3232/rws/api`.
 
-BWS needs mongoDB. You can configure the connection at `config.js`
+RWS needs mongoDB. You can configure the connection at `config.js`
 
-BWS supports SSL and Clustering. For a detailed guide on installing BWS with extra features see [Installing BWS](https://github.com/dataturk/ravencore-wallet-service/blob/master/installation.md). 
+RWS supports SSL and Clustering. For a detailed guide on installing RWS with extra features see [Installing BWS](https://github.com/dataturk/ravencore-wallet-service/blob/master/installation.md). 
 
-BWS uses by default a Request Rate Limitation to CreateWallet endpoint. If you need to modify it, check defaults.js' `Defaults.RateLimit`
-
-# Using BWS with PM2
-
-BWS can be used with PM2 with the provided `app.js` script: 
- 
-```
-  pm2 start app.js --name "bitcoin-wallet-service"
-```
+RWS uses by default a Request Rate Limitation to CreateWallet endpoint. If you need to modify it, check defaults.js' `Defaults.RateLimit`
 
 # Security Considerations
- * Private keys are never sent to BWS. Copayers store them locally.
- * Extended public keys are stored on BWS. This allows BWS to easily check wallet balance, send offline notifications to copayers, etc.
+ * Private keys are never sent to RWS. Copayers store them locally.
+ * Extended public keys are stored on RWS. This allows RWS to easily check wallet balance, send offline notifications to copayers, etc.
  * During wallet creation, the initial copayer creates a wallet secret that contains a private key. All copayers need to prove they have the secret by signing their information with this private key when joining the wallet. The secret should be shared using secured channels.
  * A copayer could join the wallet more than once, and there is no mechanism to prevent this. See [wallet](https://github.com/dataturk/ravencore-wallet)'s confirm command, for a method for confirming copayers.
- * All BWS responses are verified:
+ * All RWS responses are verified:
   * Addresses and change addresses are derived independently and locally by the copayers from their local data.
-  * TX Proposals templates are signed by copayers and verified by others, so the BWS cannot create or tamper with them.
+  * TX Proposals templates are signed by copayers and verified by others, so the RWS cannot create or tamper with them.
 
 # Using SSL
 
@@ -70,7 +58,7 @@ BWS can be used with PM2 with the provided `app.js` script:
 
 # REST API
 
-Note: all currency amounts are in units of satoshis (1/100,000,000 of a bitcoin).
+Note: all currency amounts are in units of satoshis (1/100,000,000 of a ravencoin).
 
 ## Authentication
 
